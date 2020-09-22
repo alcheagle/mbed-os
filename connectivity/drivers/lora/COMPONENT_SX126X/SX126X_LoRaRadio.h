@@ -307,10 +307,10 @@ private:
     mbed::DigitalIn _busy;
 
     // module frequency selection
-    mbed::AnalogIn _freq_select;
+    //mbed::AnalogIn _freq_select;
 
     // module device variant selection
-    mbed::AnalogIn _dev_select;
+    //mbed::AnalogIn _dev_select;
 
     // module TCXO/XTAL control
     mbed::DigitalIn _crystal_select;
