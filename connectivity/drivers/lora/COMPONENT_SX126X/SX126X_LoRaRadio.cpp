@@ -103,8 +103,8 @@ SX126X_LoRaRadio::SX126X_LoRaRadio(PinName mosi,
       _reset_ctl(reset),
       _dio1_ctl(dio1, PullNone),
       _busy(busy, PullNone),
-      _freq_select(freq_select),
-      _dev_select(device_select),
+      //_freq_select(freq_select),
+      //_dev_select(device_select),
       _crystal_select(crystal_select, PullDown),
       _ant_switch(ant_switch, PIN_INPUT, PullUp, 0)
 #ifdef MBED_CONF_RTOS_PRESENT
@@ -692,8 +692,8 @@ void SX126X_LoRaRadio::read_fifo(uint8_t *buffer, uint8_t size, uint8_t offset)
 
 uint8_t SX126X_LoRaRadio::get_device_variant(void)
 {
-    uint16_t val = 0;
-    val = _dev_select.read_u16();
+    uint16_t val = 0x2000;
+    //val = _dev_select.read_u16();
 
     if (val <= 0x2000) {
         return SX1262;
@@ -706,24 +706,24 @@ uint8_t SX126X_LoRaRadio::get_device_variant(void)
 
 uint8_t SX126X_LoRaRadio::get_frequency_support(void)
 {
-    uint16_t val = 0;
-    val = _freq_select.read_u16();
+    //uint16_t val = 0;
+    //val = _freq_select.read_u16();
 
-    if (val < 100) {
-        return (MATCHING_FREQ_915);
-    } else if (val <= 0x3000) {
-        return (MATCHING_FREQ_780);
-    } else if (val <= 0x4900) {      // 0x4724
-        return (MATCHING_FREQ_490);
-    } else if (val <= 1) {
-        return (MATCHING_FREQ_434);
-    } else if (val <= 1) {
-        return (MATCHING_FREQ_280);
-    } else if (val <= 0xF000) {
-        return (MATCHING_FREQ_169);
-    } else {
+    //if (val < 100) {
+    //    return (MATCHING_FREQ_915);
+    //} else if (val <= 0x3000) {
+    //    return (MATCHING_FREQ_780);
+    //} else if (val <= 0x4900) {      // 0x4724
+    //    return (MATCHING_FREQ_490);
+    //} else if (val <= 1) {
+    //    return (MATCHING_FREQ_434);
+    //} else if (val <= 1) {
+    //    return (MATCHING_FREQ_280);
+    //} else if (val <= 0xF000) {
+    //    return (MATCHING_FREQ_169);
+    //} else {
         return (MATCHING_FREQ_868);
-    }
+    //}
 }
 
 uint8_t SX126X_LoRaRadio::get_fsk_bw_reg_val(uint32_t bandwidth)
