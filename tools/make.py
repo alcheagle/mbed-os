@@ -53,7 +53,7 @@ from tools.utils import argparse_dir_not_parent
 from tools.utils import NoValidToolchainException
 from tools.utils import print_end_warnings
 from tools.utils import print_large_string
-from tools.settings import ROOT
+from tools.settings import ROOT,MACROS
 from tools.targets import Target
 
 def default_args_dict(options):
@@ -156,6 +156,7 @@ def main():
         "-D",
         action="append",
         dest="macros",
+        default=[],
         help="Add a macro definition"
     )
     parser.add_argument(
@@ -287,6 +288,8 @@ def main():
         help="use the specified linker script"
     )
     options = parser.parse_args()
+
+    options.macros += MACROS
 
     end_warnings = []
 
