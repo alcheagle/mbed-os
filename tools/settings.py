@@ -52,6 +52,7 @@ CPPCHECK_CMD = ["cppcheck", "--enable=all"]
 CPPCHECK_MSG_FORMAT = ["--template=[{severity}] {file}@{line}: {id}:{message}"]
 
 BUILD_OPTIONS = []
+MACROS = []
 
 # mbed.org username
 MBED_ORG_USER = ""
