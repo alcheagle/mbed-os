@@ -24,6 +24,10 @@
         "standby-mode": {
         	"help": "Default: STDBY_RC = 0, STDBY_XOSC = 1",
         	"value": 0
+        },
+        "irq-thread-stack-size": {
+            "help": "Size of the stack used by the IRQ thread",
+            "value": 1024
         }
     }
 }
