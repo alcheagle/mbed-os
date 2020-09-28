@@ -108,7 +108,7 @@ SX126X_LoRaRadio::SX126X_LoRaRadio(PinName mosi,
       _crystal_select(crystal_select, PullDown),
       _ant_switch(ant_switch, PIN_INPUT, PullUp, 0)
 #ifdef MBED_CONF_RTOS_PRESENT
-    , irq_thread(osPriorityRealtime, 1024, NULL, "LR-SX126X")
+    , irq_thread(osPriorityRealtime, MBED_CONF_SX126X_LORA_DRIVER_IRQ_THREAD_STACK_SIZE, NULL, "LR-SX126X")
 #endif
 {
     _radio_events = NULL;
