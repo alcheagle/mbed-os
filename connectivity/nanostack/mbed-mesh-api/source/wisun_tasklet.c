@@ -176,11 +176,9 @@ static void wisun_tasklet_parse_network_event(arm_event_s *event)
     switch (status) {
         case ARM_NWK_BOOTSTRAP_READY:
             /* Network is ready and node is connected to Access Point */
-            if (wisun_tasklet_data_ptr->tasklet_state != TASKLET_STATE_BOOTSTRAP_READY) {
-                tr_info("Wi-SUN bootstrap ready");
-                wisun_tasklet_data_ptr->tasklet_state = TASKLET_STATE_BOOTSTRAP_READY;
-                wisun_tasklet_network_state_changed(MESH_CONNECTED);
-            }
+            tr_info("Wi-SUN bootstrap ready");
+            wisun_tasklet_data_ptr->tasklet_state = TASKLET_STATE_BOOTSTRAP_READY;
+            wisun_tasklet_network_state_changed(MESH_CONNECTED);
             break;
         case ARM_NWK_NWK_SCAN_FAIL:
             /* Link Layer Active Scan Fail, Stack is Already at Idle state */
@@ -291,6 +289,7 @@ static void wisun_tasklet_configure_and_connect_to_network(void)
 #else
     trusted_cert.cert_len = strlen((const char *) MBED_CONF_MBED_MESH_API_ROOT_CERTIFICATE) + 1;
 #endif
+    arm_network_trusted_certificates_remove();
     arm_network_trusted_certificate_add((const arm_certificate_entry_s *)&trusted_cert);
 
     arm_certificate_entry_s own_cert = {
@@ -309,6 +308,7 @@ static void wisun_tasklet_configure_and_connect_to_network(void)
 #else
     own_cert.key_len = strlen((const char *) MBED_CONF_MBED_MESH_API_OWN_CERTIFICATE_KEY) + 1;
 #endif
+    arm_network_own_certificates_remove();
     arm_network_own_certificate_add((const arm_certificate_entry_s *)&own_cert);
 #endif
 
